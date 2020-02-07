@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Endless Runner</title>
+</head>
+<body>
+    <canvas id="canvas" width="640" height="480"></canvas>
+
+
+    <script>
+        var canvas = document.getElementById("canvas");
+        var ctx = canvas.getContext("2d");
+
+        function floor(x, height) {
+            this.x = x;
+            this.width = 700;
+            this.height = height;
+        }
+
+        var world = {
+            height: 480,
+            width: 640,
+            gravity: 10,
+            floorTiles: [
+                new floor(0, 140)
+            ],
+            draw: function() {
+                ctx.fillstyle = "black";
+                ctx.fillRect(0, 0, this.width, this.height);
+                for(index in this.floorTiles) {
+                    var tile = this.floorTiles[index];
+                    var y = world.height - tile.height;
+                    ctx.fillstyle = "yellow";
+                    ctx.fillRect(tile.x, y, tile.width, tile.height);
+                }
+            }
+        };
+        
+        function tick() {
+                world.draw();
+                window.setTimeout("tick()", 1000/60);
+            }
+            tick();
+
+
+    </script>
+    
+</body>
+</html>
